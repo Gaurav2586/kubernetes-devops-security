@@ -23,10 +23,12 @@ pipeline {
         }
       stage('Docker Build and Push') {
             steps {
-               docker.withRegistry('https://gcr.io', 'gcr:[gcr-repo-cred]') {
-                   sh 'printenv'
-                   sh 'docker build -t gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT"" .'
-                   sh 'docker push gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT""'
+                script {
+                    docker.withRegistry('https://gcr.io', 'gcr:[gcr-repo-cred]') {
+                      sh 'printenv'
+                      sh 'docker build -t gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT"" .'
+                      sh 'docker push gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT""'
+            }
         }
       }
     }     
