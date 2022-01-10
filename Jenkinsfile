@@ -10,7 +10,7 @@ pipeline {
               archive 'target/*.jar'
             }
         }  
-      stage('Unit test') {
+      stage('Unit test & JoCoCo') {
             steps {
               sh "mvn test"
             }
@@ -20,7 +20,14 @@ pipeline {
                 jacoco execPattern: 'target/jacoco.exec'
               }
             }
-        }   
-        
-    }
+        }
+      stage('Docker Build and Push') {
+            steps {
+               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+               sh 'printenv'
+               sh 'docker build -t gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT"" .'
+               sh 'docker push gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT""'
+        }
+      }
+    }     
 }
