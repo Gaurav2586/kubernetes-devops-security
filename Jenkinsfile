@@ -23,7 +23,7 @@ pipeline {
         }
       stage('Docker Build and Push') {
             steps {
-               docker.withRegistry('gcr: gcr-repo-cred', 'https://gcr.io') {
+               withDockerRegistry([credentialsId: "gcr-repo-cred", url: "https://gcr.io"]) {
                    sh 'printenv'
                    sh 'docker build -t gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT"" .'
                    sh 'docker push gcr.io/absolute-realm-333214/numeric-app:""$GIT_COMMIT""'
