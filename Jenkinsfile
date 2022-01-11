@@ -31,6 +31,11 @@ pipeline {
            }
         }
       }
+      stage('SonarQube Test') {
+            steps {
+              sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://34.122.26.154:9000 -Dsonar.login=3cc37595a2565e11f6132de43d1f17a966da1d66"
+            }
+        } 
       stage('Docker Build and Push') {
             steps {
                 script {
