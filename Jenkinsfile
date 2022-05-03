@@ -10,6 +10,11 @@ pipeline {
               archive 'target/*.jar'
             }
         }  
+      stage('Unit test & JoCoCo') {
+            steps {
+              sh "mvn test"
+            }
+        }
     }
 }
 
