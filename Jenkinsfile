@@ -21,6 +21,13 @@ pipeline {
                sh "mvn org.pitest:pitest-maven:mutationCoverage"
             }
       }
+      stage('SonarQube - SAST') {
+        steps {
+          withSonarQubeEnv('SonarQube') {
+            sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://34.67.12.150:9000"
+        }
+      }
+    }
 
       stage('Docker Build and Push') {
             steps {
@@ -30,10 +37,11 @@ pipeline {
                       sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT"" .'
                       sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT""'
             }
-        }
-      }
-    }
-  }
+         }
+       }
+     }
+   }
+ }
 }
 
 
