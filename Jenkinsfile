@@ -18,15 +18,13 @@ pipeline {
 
       stage('Docker Build and Push') {
             steps {
-                script {
-                    withDockerRegistry(credentialsId: 'gcr:gcr-repo-cred', url: 'https://gcr.io/suki-dev/gauravsuki/') {
-                      sh 'printenv'
-                      sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT"" .'
-                      sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT""'
+                sh 'docker login -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://gcr.io'
+                sh 'printenv'
+                sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT"" .'
+                sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_COMMIT""'
             }
         }
       }
     }
-  }
-}
+
 
