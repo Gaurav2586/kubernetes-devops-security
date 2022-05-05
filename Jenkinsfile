@@ -33,6 +33,11 @@ pipeline {
         }
       }
     }
+      stage('Vulnerability Scan - Docker') {
+        steps {
+           sh "mvn dependency-check:check"
+        }
+      }
       stage('Docker Build and Push') {
             steps {
                 script {
