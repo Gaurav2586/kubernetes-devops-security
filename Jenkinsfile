@@ -44,7 +44,6 @@ pipeline {
           },
           "OPA Conftest": {
             sh 'cd $(pwd) && ls -lrt'
-            sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego ./Dockerfile'
           }
         )
       }
