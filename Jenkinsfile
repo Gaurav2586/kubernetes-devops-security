@@ -6,7 +6,6 @@ pipeline {
   stages {
       stage('Build Artifact') {
             steps {
-              sh 'cp $(pwd)/Dockerfile /home/jenkins/agent/workspace'
               sh "mvn clean package -DskipTests=true"
               archive 'target/*.jar'
             }
@@ -44,7 +43,7 @@ pipeline {
             sh "bash trivy-docker-image-scan.sh"
           },
           "OPA Conftest": {
-            sh 'docker run --rm -v /home/jenkins/agent/workspace:/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
+            sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
           }
         )
       }
