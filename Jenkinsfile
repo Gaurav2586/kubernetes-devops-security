@@ -1,3 +1,5 @@
+@Library('slack') _
+
 pipeline {
   agent {
       label 'jenkins-slave'
@@ -48,18 +50,6 @@ pipeline {
         )
       }
     }
-      stage('Vulnerability Scan - Kubernetes') {
-        steps {
-          parallel(
-            "OPA-k8s-scan": {
-            sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-            },
-            "kube Scan": {
-            sh "bash kubesec-scan.sh"
-          }
-        )
-      }
-    }
       stage('Docker Build and Push') {
             steps {
                 script {
@@ -76,6 +66,7 @@ pipeline {
     always {
       junit 'target/surefire-reports/*.xml'
       jacoco execPattern: 'target/jacoco.exec'
+      sendNotification currentBuild.result
     }
   }
 }
