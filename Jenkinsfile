@@ -51,7 +51,7 @@ pipeline {
       stage('Vulnerability Scan - Kubernetes') {
         steps {
           parallel(
-            "OPA-k8s-scan" {
+            "OPA-k8s-scan": {
             sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
             },
             "kube Scan": {
