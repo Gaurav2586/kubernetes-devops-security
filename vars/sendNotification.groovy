@@ -23,6 +23,14 @@ def call(String buildStatus = 'STARTED') {
       "color": color,
       "blocks": [
         [
+          "type": "header",
+          "text": [
+            "type": "plain_text",
+            "text": "Jenkins Build - ${env.BUILD_NUMBER} is Successfull ${env.emoji}",
+            "emoji": true
+          ]
+        ],
+        [
           "type": "section",
           "fields": [
             [
