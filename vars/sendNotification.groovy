@@ -66,46 +66,6 @@ def call(String buildStatus = 'STARTED') {
           "fields": [
             [
               "type": "mrkdwn",
-              "text": "*Kubernetes Deployment Name:*\n${deploymentName}"
-            ],
-            [
-              "type": "mrkdwn",
-              "text": "*Node Port*\n32564"
-            ]
-          ], 
-          "accessory": [
-            "type": "image",
-            "image_url": "https://raw.githubusercontent.com/Gaurav2586/kubernetes-devops-security/main/slack-emojis/k8s.png",
-            "alt_text": "Kubernetes Icon"
-          ],
-        ],
-
-        [
-          "type": "section",
-          "text": [
-              "type": "mrkdwn",
-              "text": "*Kubernetes Node: * `controlplane`"
-            ],
-          "accessory": [
-            "type": "button",
-            "text": [
-              "type": "plain_text",
-              "text": "Application URL",
-              "emoji": true
-            ],
-            "value": "click_me_123",
-            "url": "${applicationURL}:32564",
-            "action_id": "button-action"
-          ]
-        ],
-        [
-          "type": "divider"
-        ],
-        [
-          "type": "section",
-          "fields": [
-            [
-              "type": "mrkdwn",
               "text": "*Git Commit:*\n${GIT_COMMIT}"
             ],
             [
