@@ -1,5 +1,3 @@
-@Library('slack') _
-
 pipeline {
   agent {
       label 'jenkins-slave'
@@ -12,6 +10,7 @@ pipeline {
             }
         } 
       } 
+    }
 
 
 
