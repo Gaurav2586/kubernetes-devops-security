@@ -2,6 +2,12 @@ pipeline {
   agent {
       label 'jenkins-slave'
 	}
+  environment {
+        GIT_COMMIT_SHORT = sh(
+                script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
+                returnStdout: true
+        )
+    }
 
   stages {
       stage('Build Artifact') {
@@ -16,8 +22,8 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'gcr:suki-dev', url: 'https://gcr.io/suki-dev/gauravsuki/') {
                       sh 'printenv'
-                      sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.${GIT_COMMIT[0..7]}"" .'
-                      sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.${GIT_COMMIT[0..7]}""'
+                      sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT"" .'
+                      sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT""' 
             }
          }
        }
