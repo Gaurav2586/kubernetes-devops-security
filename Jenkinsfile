@@ -29,7 +29,7 @@ pipeline {
          }
        }
      }
-     stage('UPDATE GIT'){
+      stage('UPDATE GIT'){
        steps {
         container('tools') {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
