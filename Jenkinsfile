@@ -34,8 +34,7 @@ pipeline {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
             sh "git config --global user.email megaurav25@gmail.com"
             sh "git config --global user.name Gaurav2586"
-            sh '''IMAGE_TAG= "${GIT_BRANCH}"''' 
-            sh '''IMAGE_TAG+= "${.GIT_COMMIT_SHORT}"'''
+            sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
             sh "echo $IMAGE_TAG"
           dir("kubernetes-devops-security") {
             sh '''#!/bin/bash
