@@ -51,10 +51,3 @@ pipeline {
   }
 
 
-
-A="X Y"
-A+=" Z"
-echo "$A
-
-
-
