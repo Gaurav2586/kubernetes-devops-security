@@ -32,9 +32,9 @@ pipeline {
       stage('UPDATE GIT'){
        steps {
         container('tools') {
-            sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
-            sh "git config --global user.email megaurav25@gmail.com"
-            sh "git config --global user.name Gaurav2586"
+          sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
+          sh "git config --global user.email megaurav25@gmail.com"
+          sh "git config --global user.name Gaurav2586"
           dir("kubernetes-devops-security") {
             sh '''#!/bin/bash
               echo $GIT_USER_EMAIL
