@@ -8,7 +8,6 @@ pipeline {
                 returnStdout: true
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
-        IMAGE_TAG = "${GIT_BRANCH.$GIT_COMMIT_SHORT}"
     }
 
   stages {
@@ -37,17 +36,12 @@ pipeline {
             sh "git config --global user.name Gaurav2586"
           dir("kubernetes-devops-security") {
             sh '''#!/bin/bash
-              echo $GIT_USER_EMAIL
-              echo $YOUR_GIT_USER_NAME
-              echo $GIT_COMMIT
-              echo $GIT_BRANCH
-              echo $GIT_COMMIT_SHORT          
+              IMAGE_TAG= "$GIT_BRANCH" 
+              IMAGE_TAG+= ".$GIT_COMMIT_SHORT"
+              echo $IMAGE_TAG
               ls -lth
-              sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:""${IMAGE_TAG}""+g' k8s_deployment_service.yaml
+              sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml
               cat k8s_deployment_service.yaml
-              pwd
-              git add k8s_deployment_service.yaml
-              git commit -am 'Publish new version' && git push
             '''
           }
           
@@ -58,7 +52,9 @@ pipeline {
 
 
 
-
+A="X Y"
+A+=" Z"
+echo "$A
 
 
 
