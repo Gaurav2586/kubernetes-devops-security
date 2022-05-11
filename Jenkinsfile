@@ -7,6 +7,7 @@ pipeline {
                 script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
                 returnStdout: true
         )
+        GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
     }
 
   stages {
