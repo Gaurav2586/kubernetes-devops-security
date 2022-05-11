@@ -8,6 +8,7 @@ pipeline {
                 returnStdout: true
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
+        IMAGE_TAG = ""$GIT_BRANCH.$GIT_COMMIT_SHORT""
     }
 
   stages {
@@ -42,7 +43,7 @@ pipeline {
               echo $GIT_BRANCH
               echo $GIT_COMMIT_SHORT          
               ls -lth
-              sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT""+g' k8s_deployment_service.yaml
+              sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:""${IMAGE_TAG}""+g' k8s_deployment_service.yaml
               cat k8s_deployment_service.yaml
               pwd
               git add k8s_deployment_service.yaml
