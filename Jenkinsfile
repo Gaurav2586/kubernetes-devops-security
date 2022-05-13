@@ -46,15 +46,18 @@ pipeline {
           
         }
       stage("sleep") {
-            options {
-                timeout(time: 600, unit: "SECONDS")
+        steps {
+              echo "Started Sleep"
+              sleep(time: 600, unit: "SECONDS")
             }
+            
           }
+          
+        }
 
       
       }
     
-    }
 
 
 
