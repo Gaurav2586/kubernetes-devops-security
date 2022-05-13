@@ -41,13 +41,14 @@ pipeline {
             sh "git add ."
             sh "git commit -m 'Done by JenkinsJob Changemanifest: {env.BUILD_NUMBER}'"
             sh "git push origin main"
-            '''
           }
           
-         }
+        }
+      
       }
+    
     }
-  }
+
 
 
 
