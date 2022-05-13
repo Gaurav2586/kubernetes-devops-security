@@ -36,6 +36,8 @@ pipeline {
             sh "git config --global user.name Gaurav2586"
             sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
             sh "echo $IMAGE_TAG"
+            sh "pwd"
+            sh "ls -lrt"
             sh "sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml"
             sh "cat k8s_deployment_service.yaml"
             sh "git add ."
