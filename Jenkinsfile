@@ -36,11 +36,11 @@ pipeline {
             sh "git config --global user.name Gaurav2586"
             sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
             sh "echo $IMAGE_TAG"
-            dir("kubernetes-devops-security") {
-              sh '''#!/bin/bash
-                ls -lth
-                sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml
-                cat k8s_deployment_service.yaml
+            sh "sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml"
+            sh "cat k8s_deployment_service.yaml"
+            sh "git add ."
+            sh "git commit -m 'Done by JenkinsJob Changemanifest: {env.BUILD_NUMBER}'"
+            sh "git push origin main"
             '''
           }
           
