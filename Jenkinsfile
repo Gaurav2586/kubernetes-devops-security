@@ -38,7 +38,7 @@ pipeline {
             sh "echo $IMAGE_TAG"
             sh "pwd"
             sh "ls -lrt"
-            sh "sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml"
+            sh "cd kubernetes-devops-security && sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml"
             sh "cat k8s_deployment_service.yaml"
             sh "git add ."
             sh "git commit -m 'Done by JenkinsJob Changemanifest: {env.BUILD_NUMBER}'"
