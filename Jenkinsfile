@@ -39,9 +39,9 @@ pipeline {
             sh "pwd"
             sh "cd kubernetes-devops-security && sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:main.4536679+g' k8s_deployment_service.yaml"
             sh "cat k8s_deployment_service.yaml"
-            sh "git add ."
-            sh "git commit -m 'Done by JenkinsJob Changemanifest: $BUILD_NUMBER'"
-            sh "git push https://github.com/Gaurav2586/kubernetes-devops-security.git"
+            //sh "git add ."
+            //sh "git commit -m 'Done by JenkinsJob Changemanifest: $BUILD_NUMBER'"
+            //sh "git push https://github.com/Gaurav2586/kubernetes-devops-security.git HEAD:main"
           }
           
         }
