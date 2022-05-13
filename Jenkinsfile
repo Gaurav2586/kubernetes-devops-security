@@ -34,11 +34,11 @@ pipeline {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
             sh "git config --global user.email megaurav25@gmail.com"
             sh "git config --global user.name Gaurav2586"
-            sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
-            sh "echo $IMAGE_TAG"
+            //sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
+            //sh "echo $IMAGE_TAG"
             sh "pwd"
             sh "ls -lrt"
-            sh "cd kubernetes-devops-security && sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:${IMAGE_TAG}+g' k8s_deployment_service.yaml"
+            sh "cd kubernetes-devops-security && sed -i 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:main.4536679+g' k8s_deployment_service.yaml"
             sh "cat k8s_deployment_service.yaml"
             sh "git add ."
             sh "git commit -m 'Done by JenkinsJob Changemanifest: {env.BUILD_NUMBER}'"
