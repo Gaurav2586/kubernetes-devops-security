@@ -36,6 +36,8 @@ pipeline {
             sh "git config --global user.name Gaurav2586"
             //sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
             //sh "echo $IMAGE_TAG"
+            sh "ls -lrt"
+            sh "pwd"
             dir('kubernetes-devops-security'){
 
                sh "cd kubernetes-devops-security && sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:main.4536679+g' -i k8s_deployment_service.yaml"
