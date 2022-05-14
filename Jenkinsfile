@@ -9,6 +9,7 @@ pipeline {
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
         IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
+        GIT_CREDS = credentials('Gaurav')
     }
 
   stages {
@@ -42,9 +43,9 @@ pipeline {
 
                sh "sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:$IMAGE_TAG+g' -i k8s_deployment_service.yaml"
                sh "cat k8s_deployment_service.yaml"
-               //sh "git add ."
-               //sh "git commit -m 'Done by JenkinsJob Changemanifest: $BUILD_NUMBER'" 
-               //sh "git push https://Gaurav2586:secret@github.com/Gaurav2586/kubernetes-devops-security.git HEAD:main"
+               sh "git add ."
+               sh "git commit -m 'Done by JenkinsJob ChangeManifest: $BUILD_NUMBER'" 
+               sh "git push https://GIT_CREDS_USR:GIT_CREDS_PSW@github.com/GIT_CREDS_USR/kubernetes-devops-security.git HEAD:main"
            }
           
           }
