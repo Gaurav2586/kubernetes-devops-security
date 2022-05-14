@@ -44,7 +44,7 @@ pipeline {
                sh "cat k8s_deployment_service.yaml"
                sh "git add ."
                sh "git commit -m 'Done by JenkinsJob ChangeManifest: $BUILD_NUMBER'" 
-               sh "git push https://GIT_CREDS_PSW@github.com/Gaurav2586/kubernetes-devops-security.git HEAD:main"
+               sh "git push https://GIT_CREDS_PSW@github.com/kubernetes-devops-security.git HEAD:main"
            }
           
           }
