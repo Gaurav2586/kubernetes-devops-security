@@ -9,7 +9,7 @@ pipeline {
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
         IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
-        GIT_CREDS = credentials('Gaurav')
+        GIT_CREDS = credentials('ci-cd-demo')
     }
 
   stages {
@@ -36,7 +36,6 @@ pipeline {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
             sh "git config --global user.email megaurav25@gmail.com"
             sh "git config --global user.name Gaurav2586"
-            sh "git config --global user.password 'secret'"
             sh "ls -lrt"
             sh "pwd"
             dir('kubernetes-devops-security'){
