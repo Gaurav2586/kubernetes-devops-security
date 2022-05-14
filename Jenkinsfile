@@ -8,6 +8,7 @@ pipeline {
                 returnStdout: true
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
+        IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
     }
 
   stages {
@@ -34,17 +35,16 @@ pipeline {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
             sh "git config --global user.email megaurav25@gmail.com"
             sh "git config --global user.name Gaurav2586"
-            //sh '''IMAGE_TAG= "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"''' 
-            //sh "echo $IMAGE_TAG"
+            sh "git config --global user.password 'secret'"
             sh "ls -lrt"
             sh "pwd"
             dir('kubernetes-devops-security'){
 
-               sh "sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:main.4536679+g' -i k8s_deployment_service.yaml"
+               sh "sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:$IMAGE_TAG+g' -i k8s_deployment_service.yaml"
                sh "cat k8s_deployment_service.yaml"
-               sh "git add ."
-               sh "git commit -m 'Done by JenkinsJob Changemanifest: $BUILD_NUMBER'"
-               sh "git push https://github.com/Gaurav2586/kubernetes-devops-security.git HEAD:main"
+               //sh "git add ."
+               //sh "git commit -m 'Done by JenkinsJob Changemanifest: $BUILD_NUMBER'" 
+               //sh "git push https://Gaurav2586:secret@github.com/Gaurav2586/kubernetes-devops-security.git HEAD:main"
            }
           
           }
