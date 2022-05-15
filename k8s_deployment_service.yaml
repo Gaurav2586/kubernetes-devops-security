@@ -22,7 +22,13 @@ spec:
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
-          readOnlyRootFilesystem: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /
+          name: tmpfs
+      volumes:
+        - name: tmpfs-1
+          emptyDir: {}  
 ---
 apiVersion: v1
 kind: Service
