@@ -48,20 +48,13 @@ pipeline {
                sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetes-devops-security.git HEAD:main'
             }
           }
-         }
+         
         }
-      stage("sleep") {
-        steps {
-              echo "Started Sleep"
-              sleep(time: 600, unit: "SECONDS")
-            }
-            
-          }
-          
-        }
-
+       
+      }  
       
-      }
+    }
+  }
     
 
 
