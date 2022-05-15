@@ -1,3 +1,5 @@
+@Library('slack') _
+
 pipeline {
   agent {
       label 'jenkins-slave'
@@ -9,7 +11,6 @@ pipeline {
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
         IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
-        GIT= credentials('ci-cd-demo')
     }
 
   stages {
@@ -52,11 +53,36 @@ pipeline {
         }
        
       }  
-      
+
+    post {
+    //    always { 
+    //      junit 'target/surefire-reports/*.xml'
+    //      jacoco execPattern: 'target/jacoco.exec'
+    //      pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+    //      dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+    //      publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
+
+    // Use sendNotifications.groovy from shared library and provide current build result as parameter 
+    //      sendNotification currentBuild.result
+    //    }
+
+    success {
+      script {
+        /* Use slackNotifier.groovy from shared library and provide current build result as parameter */
+        env.failedStage = "none"
+        env.emoji = ":white_check_mark: :tada: :thumbsup_all:"
+        sendNotification currentBuild.result
+       }
+     }
+
+     // failure {
+
+     // }
     }
-  }
+  
+   }
+ 
+  }  
+  
+
     
-
-
-
-
