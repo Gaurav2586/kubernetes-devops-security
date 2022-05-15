@@ -27,7 +27,7 @@ spec:
         - mountPath: /
           name: tmpfs
       volumes:
-        - name: tmpfs-1
+        - name: tmpfs
           emptyDir: {}  
 ---
 apiVersion: v1
