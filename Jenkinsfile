@@ -9,7 +9,7 @@ pipeline {
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
         IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
-        GIT_CREDS = credentials('ci-cd-demo')
+        GIT= credentials('ci-cd-demo')
     }
 
   stages {
@@ -33,6 +33,7 @@ pipeline {
      }
       stage('UPDATE GIT'){
        steps {
+          withCredentials([usernamePassword(credentialsId: 'ci-cd-demo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
             sh "git config --global user.email megaurav25@gmail.com"
             sh "git config --global user.name Gaurav2586"
@@ -44,11 +45,10 @@ pipeline {
                sh "cat k8s_deployment_service.yaml"
                sh "git add ."
                sh "git commit -m 'Done by JenkinsJob ChangeManifest: $BUILD_NUMBER'" 
-               sh "git push https://GIT_CREDS_PSW@github.com/GIT_CREDS_USR/kubernetes-devops-security.git HEAD:main"
-           }
-          
+               sh "git push https:/${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetes-devops-security.git HEAD:main"
+            }
           }
-        
+         }
         }
       stage("sleep") {
         steps {
