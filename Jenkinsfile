@@ -12,7 +12,7 @@ pipeline {
                 returnStdout: true
         )
         GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
-        IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
+        // IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
     }
 
   stages {
@@ -77,7 +77,7 @@ pipeline {
                 }
             }
        }
-       
+
       stage('UPDATE GIT'){
        steps {
           withCredentials([usernamePassword(credentialsId: 'ci-cd-demo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
