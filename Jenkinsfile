@@ -61,22 +61,22 @@ pipeline {
          )
         }
       }
-      // stage('Vulnerability Scan - Kubernetes') {
-      //   steps {
-      //       sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-      //      }
-      //   }
-      // stage('Docker Build and Push') {
-      //       steps {
-      //           script {
-      //               withDockerRegistry(credentialsId: 'gcr:suki-dev', url: 'https://gcr.io/suki-dev/gauravsuki/') {
-      //                 sh 'printenv'
-      //                 sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT"" .'
-      //                 sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT""'
-      //               }
-      //             }
-      //           }
-      //  }
+      stage('Vulnerability Scan - Kubernetes') {
+        steps {
+            sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+           }
+        }
+      stage('Docker Build and Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'gcr:suki-dev', url: 'https://gcr.io/suki-dev/gauravsuki/') {
+                      sh 'printenv'
+                      sh 'docker build -t gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT"" .'
+                      sh 'docker push gcr.io/suki-dev/gauravsuki/numeric-app:""$GIT_BRANCH.$GIT_COMMIT_SHORT""'
+                    }
+                }
+            }
+       }
       // stage('UPDATE GIT'){
       //  steps {
       //     withCredentials([usernamePassword(credentialsId: 'ci-cd-demo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
