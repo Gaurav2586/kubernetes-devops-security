@@ -11,7 +11,7 @@ pipeline {
                 script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
                 returnStdout: true
         )
-        GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
+        // GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
         // IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
     }
 
