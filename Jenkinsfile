@@ -6,14 +6,14 @@ pipeline {
       label 'jenkins-slave'
   }
 
-  // environment {
-  //       GIT_COMMIT_SHORT = sh(
-  //               script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
-  //               returnStdout: true
-  //       )
-  //       GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
-  //       IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
-  //   }
+  environment {
+        GIT_COMMIT_SHORT = sh(
+                script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
+                returnStdout: true
+        )
+        GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
+        IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
+    }
 
   stages {
       // stage ('Testing Slack'){
