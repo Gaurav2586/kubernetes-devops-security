@@ -1,3 +1,4 @@
+@Library('slack') _
 
 pipeline {
   agent {
@@ -116,6 +117,7 @@ pipeline {
         env.emoji = ":white_check_mark: :tada: :thumbsup_all:"
         sendNotification currentBuild.result
       }
+     
     }
 
     // failure {
