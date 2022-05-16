@@ -5,6 +5,15 @@ pipeline {
       label 'jenkins-slave'
 	}
 
+  environment {
+        GIT_COMMIT_SHORT = sh(
+                script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
+                returnStdout: true
+        )
+        GIT_BRANCH = "${GIT_BRANCH.split("/")[1]}"
+        IMAGE_TAG = "${GIT_BRANCH}.${GIT_COMMIT_SHORT}"
+    }
+
   stages {
       stage('Build Artifact') {
             steps {
@@ -55,9 +64,6 @@ pipeline {
          parallel(
           "OPA Scan": {
             sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-          },
-          "Kubesec Scan": {
-            sh "bash kubesec-scan.sh"
           },
         )
       }
