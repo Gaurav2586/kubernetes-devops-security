@@ -22,12 +22,7 @@ spec:
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
-<<<<<<< Updated upstream
           readOnlyRootFilesystem: flase
-
-=======
-          readOnlyRootFilesystem: flase 
->>>>>>> Stashed changes
 ---
 apiVersion: v1
 kind: Service
