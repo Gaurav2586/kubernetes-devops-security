@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: default
       containers:
-      - image: gcr.io/suki-dev/gauravsuki/numeric-app:main.d44dbc3
+      - image: gcr.io/suki-dev/gauravsuki/numeric-app:main.9da0d0b
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
