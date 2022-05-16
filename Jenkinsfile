@@ -17,10 +17,11 @@ pipeline {
 
   stages {
       stage ('Testing Slack'){
-        step {
+        steps {
           sh 'exit 0'
         }
       }
+
     //   stage('Build Artifact') {
     //         steps {
     //           sh "mvn clean package -DskipTests=true"
@@ -103,7 +104,7 @@ pipeline {
     //   } 
 
    
-   }
+  }
   post {
     //    always { 
     //      junit 'target/surefire-reports/*.xml'
