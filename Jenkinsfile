@@ -38,11 +38,6 @@ pipeline {
           withSonarQubeEnv('SonarQube') {
            sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://34.67.12.150:9000"
         }
-        timeout(time: 10, unit: 'MINUTES') {
-          script {
-            waitForQualityGate abortPipeline: true
-          }
-        }
       }
     }
       stage('Vulnerability Scan - Docker') {
