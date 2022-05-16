@@ -63,11 +63,8 @@ pipeline {
       }
       stage('Vulnerability Scan - Kubernetes') {
         steps {
-         parallel(
-          "OPA Scan": {
             sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
-           },
-         )
+           }
         }
       }
       stage('Docker Build and Push') {
@@ -81,27 +78,27 @@ pipeline {
                   }
                 }
        }
-      stage('UPDATE GIT'){
-       steps {
-          withCredentials([usernamePassword(credentialsId: 'ci-cd-demo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
-            sh "git config --global user.email megaurav25@gmail.com"
-            sh "git config --global user.name Gaurav2586"
-            sh "ls -lrt"
-            sh "pwd"
-            dir('kubernetes-devops-security'){
+      // stage('UPDATE GIT'){
+      //  steps {
+      //     withCredentials([usernamePassword(credentialsId: 'ci-cd-demo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+      //       sh "git clone https://github.com/Gaurav2586/kubernetes-devops-security.git"
+      //       sh "git config --global user.email megaurav25@gmail.com"
+      //       sh "git config --global user.name Gaurav2586"
+      //       sh "ls -lrt"
+      //       sh "pwd"
+      //       dir('kubernetes-devops-security'){
 
-               sh "sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:$IMAGE_TAG+g' -i k8s_deployment_service.yaml"
-               sh "cat k8s_deployment_service.yaml"
-               sh "git add ."
-               sh "git commit -m 'Done by JenkinsJob ChangeManifest: $BUILD_NUMBER'" 
-               sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetes-devops-security.git HEAD:main'
-            }
-          }
+      //          sh "sed -e 's+gcr.io/suki-dev/gauravsuki/numeric-app.*+gcr.io/suki-dev/gauravsuki/numeric-app:$IMAGE_TAG+g' -i k8s_deployment_service.yaml"
+      //          sh "cat k8s_deployment_service.yaml"
+      //          sh "git add ."
+      //          sh "git commit -m 'Done by JenkinsJob ChangeManifest: $BUILD_NUMBER'" 
+      //          sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetes-devops-security.git HEAD:main'
+      //       }
+      //     }
          
-        }
+      //   }
        
-      } 
+      // } 
 
    
   }
