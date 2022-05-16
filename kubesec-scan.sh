@@ -1,6 +1,6 @@
 # using kubesec v2 api
 
-apt install -y curl 
+apt-get update && apt-get install -y curl && curl --version
 
 scan_result=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan)
 scan_message=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan | jq .[0].message -r ) 
