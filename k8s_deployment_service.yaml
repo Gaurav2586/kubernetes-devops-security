@@ -22,7 +22,6 @@ spec:
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
-          readOnlyRootFilesystem: flase
 ---
 apiVersion: v1
 kind: Service
