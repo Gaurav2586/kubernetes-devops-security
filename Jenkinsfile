@@ -16,23 +16,23 @@ pipeline {
   //   }
 
   stages {
-      stage ('Testing Slack'){
-        steps {
-          sh 'exit 0'
-        }
-      }
-
-      // stage('Build Artifact') {
-      //       steps {
-      //         sh "mvn clean package -DskipTests=true"
-      //         archive 'target/*.jar'
-      //       }
-      //   }  
-      // stage('Unit test & JoCoCo') {
-      //       steps {
-      //         sh "mvn test"
-      //       }
+      // stage ('Testing Slack'){
+      //   steps {
+      //     sh 'exit 0'
       //   }
+      // }
+
+      stage('Build Artifact') {
+            steps {
+              sh "mvn clean package -DskipTests=true"
+              archive 'target/*.jar'
+            }
+        }  
+      stage('Unit test & JoCoCo') {
+            steps {
+              sh "mvn test"
+            }
+        }
 
       // stage('Mutation Tests - PIT') {
       //       steps {
