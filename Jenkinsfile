@@ -105,7 +105,7 @@ pipeline {
         env.failedStage = "none"
         env.emoji = ":white_check_mark: :tada: :thumbsup_all:"
         sendNotification currentBuild.result
-         }
+        }
     
       }
   
