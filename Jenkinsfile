@@ -66,7 +66,6 @@ pipeline {
             sh 'conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
            }
         }
-      }
       stage('Docker Build and Push') {
             steps {
                 script {
