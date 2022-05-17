@@ -77,7 +77,7 @@ pipeline {
                 }
             }
        }
-      stage('Prompte to PROD?') {
+      stage('Promote to PROD?') {
             steps {
               timeout(time: 2, unit: 'DAYS') {
                 input 'Do you want to Approve the Deployment ?'
